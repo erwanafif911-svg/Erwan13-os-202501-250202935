@@ -135,7 +135,8 @@ praktikum/week5-scheduling-fcfs-sjf/screenshots/
 
 ## Hasil Eksekusi
 Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+![Screenshot hasil](
+![Uploading Eksperimen.jpg…]()
 
 ---
 
