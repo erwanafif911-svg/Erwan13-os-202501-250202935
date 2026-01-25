@@ -1,5 +1,5 @@
 
-# Laporan Praktikum Minggu [X]
+# Laporan Praktikum Minggu [15]
 Topik:  mini projek sistem operasi
 ---
 
