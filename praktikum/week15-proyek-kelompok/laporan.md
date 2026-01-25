@@ -179,7 +179,8 @@ Hasil Output Aplikasi:
 
 Berikut adalah screnshoots hasil simulasi yang dihasilkan:
 
-![screenshots](screenshots/docker_run_page_replacment.jpeg)
+![screenshots]()![Uploading WhatsApp Image 2026-01-25 at 14.50.10.jpeg…]()
+
 
 Berdasarkan eksekusi pada terminal, berikut adalah tabel perubahan isi RAM pada setiap langkah:
 
@@ -225,9 +226,9 @@ Identitas  rincian peran dan kontribusi setiap anggota tim:
 
 |         Nama         | Kelas  |    NIM    |           Peran            |
 | :------------------: | :----: | :-------: | :------------------------: |
-|    Muhamad Juhan     | 1 IKRB | 250202953 | Projejct Lead & Integrator |
-|       Safrudin       | 1 IKRB | 250202966 |        Developer 1         |
-| Ahmad Wildan Asrovi  | 1 IKRB | 250202927 |        Developer 2         |
+|  Ridho yoga yuwana   | 1 IKRB | 250202953 | Projejct Lead & Integrator |
+|  Erwan afif hidayat  | 1 IKRB | 250202966 |        Developer 1         |
+| Miftah raihan hidayat| 1 IKRB | 250202927 |        Developer 2         |
 | Virli A'inun Subroto | 1 IKRB | 250202913 |     Documentation & QA     |
 
 
