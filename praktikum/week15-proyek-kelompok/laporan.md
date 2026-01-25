@@ -126,12 +126,12 @@ Berikut adalah ringkasan prosedur demo yang dilakukan berdasarkan bukti eksekusi
 
 ### 3.3 Bukti Eksekusi
 
-- Skenario 1 (Scheduling Musik): Menampilkan antrean lagu seperti "Blue - Yung Kai" hingga "Double Take - Dhruv" dengan perhitungan Waiting Time dan Turnaround Time (TAT) yang presisi.
-![screenshots](screenshots/Docker_Build_Scheduling.jpeg)
+- Skenario 1 (Scheduling Musik): Menampilkan antrean lagu seperti "Virgoun – Selamat Tinggal " hingga " Oasis – Champagne Supernova" dengan perhitungan Waiting Time dan Turnaround Time (TAT) yang presisi.
+ ![WhatsApp Image 2026-01-25 at 14 50 10](https://github.com/user-attachments/assets/d3c8065d-913d-42cf-b489-5d73b4a97935)
 
 - Skenario 2 (Management RAM): Menjalankan simulasi penggantian halaman (Page Replacement) menggunakan algoritma FIFO dalam lingkungan Docker terisolasi.
 
-![screenshots](screenshots/docker_build_page_replacment.jpeg)
+ ![WhatsApp Image 2026-01-25 at 14 50 04](https://github.com/user-attachments/assets/ba397c19-be0c-4f1a-b154-ad043b363fa2)
 
 ---
 ### 4. Hasil Pengujian dan Analisis
@@ -139,29 +139,37 @@ Berikut adalah ringkasan prosedur demo yang dilakukan berdasarkan bukti eksekusi
 ### A. Hasil Pengujian Modul A (CPU Scheduling - FCFS)
 Skenario Pengujian: Kami mensimulasikan penjadwalan pemutaran musik menggunakan algoritma First-Come First-Served (FCFS) dengan dataset antrean sebagai berikut:
 
-- Blue – Yung Kai: Waktu Datang 0, Durasi 3
-- Untitled – Rex Orange: Waktu Datang 1, Durasi 3
-- Peradaban – Feast.: Waktu Datang 2, Durasi 5
-- Sial – Mahalini: Waktu Datang 3, Durasi 4
-- Double Take – Dhruv: Waktu Datang 4, Durasi 3
+Virgoun – Selamat Tinggal
+Waktu Datang: 0, Durasi: 3
+
+Issam Alnajjar – Hadal Ahbek
+Waktu Datang: 1, Durasi: 3
+
+Oasis – Wonderwall
+Waktu Datang: 2, Durasi: 5
+
+Dongker – Disarankan di Bandung
+Waktu Datang: 3, Durasi: 4
+
+Oasis – Champagne Supernova
+Waktu Datang: 4, Durasi: 3
 
 Hasil Output Aplikasi: Berikut adalah tabel hasil simulasi pemutaran musik yang dihasilkan oleh sistem:
-![screenshots](screenshots/Docker_run_Scheduling.jpeg)
+
+<img width="861" height="219" alt="Screenshot 2026-01-25 152024" src="https://github.com/user-attachments/assets/f3280b01-80bd-4b91-b8a4-3ce705f137a5" />
 
 ### Tabel Hasil Simulasi Penjadwalan (FCFS)
 
-| Nama Musik | Waktu Datang | Durasi Musik | Waktu Selesai | TAT | Waktu Tunggu |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Blue - Yung Kai | 0 | 3 | 3 | 3 | 0 |
-| Untitled - Rex Orange | 1 | 3 | 6 | 5 | 2 |
-| Peradaban - Feast. | 2 | 5 | 11 | 9 | 4 |
-| Sial - Mahalini | 3 | 4 | 15 | 12 | 8 |
-| Double Take - Dhruv | 4 | 3 | 18 | 14 | 11 |
-
-Metrik Akhir:
-- Rata-rata Turnaround Time (TAT): 8.60
-
-- Rata-rata Waiting Time (Waktu Tunggu): 5.00
+| Nama Musik                          | Waktu Datang | Durasi | Waktu Selesai | TAT | Waktu Tunggu |
+| ----------------------------------- | ------------ | ------ | ------------- | --- | ------------ |
+| **Virgoun – Selamat Tinggal**       | 0            | 3      | 3             | 3   | 0            |
+| **Issam Alnajjar – Hadal Ahbek**    | 1            | 3      | 6             | 5   | 2            |
+| **Oasis – Wonderwall**              | 2            | 5      | 11            | 9   | 4            |
+| **Dongker – Disarankan di Bandung** | 3            | 4      | 15            | 12  | 8            |
+| **Oasis – Supernova**               | 4            | 3      | 18            | 14  | 11           |
+=== HASIL AKHIR ===
+Rata-rata Turnaround Time (TAT) : 8.60
+Rata-rata Waiting Time         : 5.00
 
 Analisis Kinerja
 Berdasarkan hasil simulasi menggunakan algoritma First-Come First-Served (FCFS) pada sistem pemutaran musik:
@@ -177,9 +185,8 @@ Skenario Pengujian: Kami mensimulasikan manajemen RAM laptop menggunakan dataset
 
 Hasil Output Aplikasi:
 
-Berikut adalah screnshoots hasil simulasi yang dihasilkan:
-
-![screenshots]()![Uploading WhatsApp Image 2026-01-25 at 14.50.10.jpeg…]()
+Beri<img width="1903" height="1050" alt="Screenshot 2026-01-25 154900" src="https://github.com/user-attachments/assets/6ba863f8-3a86-4a09-b021-c3c825d128e6" />
+kut adalah screnshoots hasil simulasi yang dihasilkan:
 
 
 Berdasarkan eksekusi pada terminal, berikut adalah tabel perubahan isi RAM pada setiap langkah:
@@ -218,7 +225,6 @@ Analisis :
 ### 5. Pembagian Peran dan Kontribusi
 kolaboratif bembagian tugas
 
-![screenshots](screenshots/comit.png)
 
 Identitas  rincian peran dan kontribusi setiap anggota tim:
 
@@ -226,10 +232,10 @@ Identitas  rincian peran dan kontribusi setiap anggota tim:
 
 |         Nama         | Kelas  |    NIM    |           Peran            |
 | :------------------: | :----: | :-------: | :------------------------: |
-|  Ridho yoga yuwana   | 1 IKRB | 250202953 | Projejct Lead & Integrator |
-|  Erwan afif hidayat  | 1 IKRB | 250202966 |        Developer 1         |
-| Miftah raihan hidayat| 1 IKRB | 250202927 |        Developer 2         |
-| Virli A'inun Subroto | 1 IKRB | 250202913 |     Documentation & QA     |
+|  Ridho yoga yuwana   | 1 IKRA | 250202963 | Projejct Lead & Integrator |
+|  Erwan afif hidayat  | 1 IKRA | 250202935 |        Developer 1         |
+| Miftah raihan hidayat| 1 IKRA | 250202950 |        Developer 2         |
+|naufal adib bissibyan | 1 IKRA | 250202958 |     Documentation & QA     |
 
 
 
