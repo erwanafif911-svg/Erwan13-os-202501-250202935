@@ -6,9 +6,9 @@ Topik:  mini projek sistem operasi
 
 ## NAMA ANGGOTA KELOMPOK
 - **Nama** : ERWAN AFFIF HIDAYAT  
-- **Nama** : RIDHO YOGA JUWANA   
+- **Nama** : RIDHO YOGA YUWANA   
 - **Nama** : MIFTAH RAIHAN HIDAYAT
-- **Nama** : NAUFAL ADIB SETIAWAN
+- **Nama** : NAUFAL ADIB BISSIBYAN
 ---
 
  ### 1. PENDAHULUAN
