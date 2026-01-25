@@ -174,9 +174,9 @@ Rata-rata Waiting Time         : 5.00
 Analisis Kinerja
 Berdasarkan hasil simulasi menggunakan algoritma First-Come First-Served (FCFS) pada sistem pemutaran musik:
 
-1. Mekanisme Kerja: Musik diputar secara berurutan berdasarkan waktu kedatangannya. Musik pertama (Blue) langsung diputar tanpa waktu tunggu (0), sementara musik berikutnya harus menunggu musik sebelumnya selesai.
+1. Mekanisme Kerja: Musik diputar secara berurutan berdasarkan waktu kedatangannya. Musik pertama (Virgoun) langsung diputar tanpa waktu tunggu (0), sementara musik berikutnya harus menunggu musik sebelumnya selesai.
 
-2. Akumulasi Waktu Tunggu: Terlihat adanya peningkatan waktu tunggu yang signifikan seiring bertambahnya antrean. Musik terakhir (Double Take) harus menunggu selama 11 satuan waktu meskipun durasinya hanya 3.
+2. Akumulasi Waktu Tunggu: Terlihat adanya peningkatan waktu tunggu yang signifikan seiring bertambahnya antrean. Musik terakhir (Oasis) harus menunggu selama 11 satuan waktu meskipun durasinya hanya 3.
 
 3. Kesimpulan: Meskipun algoritma ini adil secara urutan kedatangan, FCFS mengakibatkan rata-rata waktu tunggu menjadi cukup tinggi (5.00) karena musik yang datang kemudian selalu bergantung pada penyelesaian seluruh durasi musik di depannya.
 
