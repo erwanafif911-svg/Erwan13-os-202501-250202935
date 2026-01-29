@@ -93,7 +93,7 @@ Metrik yang dihitung:
 
 * Bahasa Pemrograman: Python
 * Lingkungan: Docker Container
-* Base Image: `python:3.9-slim` dan `python:3.11-slim`
+* Base Image: `pyton:3.9-slim` dan `pyton:3.11-slim`
 
 ---
 
