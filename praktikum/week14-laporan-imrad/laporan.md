@@ -1,229 +1,173 @@
 
-# Laporan Praktikum Minggu [13]
-Topik: [Docker – Resource Limit (CPU & Memori)]
+# Laporan Praktikum Minggu [14]
+Topik: [Penyusunan Laporan Praktikum Format IMRAD]
 
 ---
 
 ## Identitas
 - **Nama**  : [Erwan affif hidayat]  
-- **NIM**   : [290202935]  
+- **NIM**   : [250202935]  
 - **Kelas** : [1IKRA]
 
 ---
 
 ## Tujuan
 Setelah menyelesaikan tugas ini, mahasiswa mampu:
+1. Menyusun laporan praktikum dengan struktur ilmiah (Pendahuluan–Metode–Hasil–Pembahasan–Kesimpulan).
+2. Menyajikan hasil uji dalam bentuk tabel dan/atau grafik yang jelas.
+3. Menuliskan analisis hasil dengan argumentasi yang logis.
+4. Menyusun sitasi dan daftar pustaka dengan format yang konsisten.
+5. Mengunggah draft laporan ke repositori dengan rapi dan tepat waktu.
 
-1. Menulis Dockerfile sederhana untuk sebuah aplikasi/skrip.
-2. Membangun image dan menjalankan container.
-3. Menjalankan container dengan pembatasan CPU dan memori.
-4. Mengamati dan menjelaskan perbedaan eksekusi container dengan dan tanpa limit resource.
-5. Menyusun laporan praktikum secara runtut dan sistematis.
----
-
-## Dasar Teori
-**1.Containerization**
-
-Docker menggunakan container untuk menjalankan aplikasi dalam lingkungan terisolasi. Container berbagi kernel dengan sistem operasi host namun tetap terpisah dalam hal proses dan sistem file.
-
-**2.Isolasi dengan Linux Namespaces**
-
-Linux namespaces memungkinkan pemisahan resource seperti proses, jaringan, dan sistem file sehingga container tidak saling mengganggu meskipun berjalan di host yang sama.
-
-**3.Pengaturan Resource dengan cgroups**
-
-Pembatasan CPU dan memori pada container dilakukan menggunakan control groups (cgroups) yang mengatur, membatasi, dan memantau penggunaan resource oleh proses di dalam container.
-
-**4.Pembatasan CPU**
-
-Limit CPU mengatur jatah waktu prosesor yang dapat digunakan container, sehingga aplikasi dengan beban komputasi tinggi akan berjalan lebih lambat tetapi tidak memonopoli CPU host.
-
-**5.Pembatasan Memori**
-
-Limit memori mencegah aplikasi menggunakan RAM secara berlebihan. Jika batas terlampaui, sistem dapat menghentikan proses (Out-Of-Memory Kill) untuk menjaga stabilitas sistem.
 
 ---
 
-## Langkah Praktikum
-1. **Persiapan Lingkungan**
+## Abstrak
 
-   - Pastikan Docker terpasang dan berjalan.
-   - Verifikasi:
-     ```bash
-     docker version
-     docker ps
-     ```
+Penjadwalan CPU merupakan mekanisme penting dalam sistem operasi untuk menentukan urutan eksekusi proses agar pemanfaatan prosesor lebih efisien. Setiap algoritma penjadwalan memiliki karakteristik yang berbeda dan berdampak langsung terhadap kinerja sistem, khususnya pada waktu tunggu (waiting time) dan waktu penyelesaian (turnaround time). Praktikum ini bertujuan untuk membandingkan kinerja algoritma First Come First Served (FCFS) dan Shortest Job First (SJF) menggunakan simulasi berbasis program Python. Data proses dibaca dari file CSV untuk meningkatkan keterulangan eksperimen. Hasil pengujian menunjukkan bahwa algoritma SJF menghasilkan rata-rata waiting time dan turnaround time yang lebih rendah dibandingkan FCFS. Namun, FCFS memiliki keunggulan dari sisi kesederhanaan implementasi. Dengan demikian, pemilihan algoritma penjadwalan harus disesuaikan dengan kebutuhan dan karakteristik sistem.
 
-2. **Membuat Aplikasi/Skrip Uji**
-
-   Buat program sederhana di folder `code/` (bahasa bebas) yang:
-   - Melakukan komputasi berulang (untuk mengamati limit CPU), dan/atau
-   - Mengalokasikan memori bertahap (untuk mengamati limit memori).
-
-3. **Membuat Dockerfile**
-
-   - Tulis `Dockerfile` untuk menjalankan program uji.
-   - Build image:
-     ```bash
-     docker build -t week13-resource-limit .
-     ```
-
-4. **Menjalankan Container Tanpa Limit**
-
-   - Jalankan container normal:
-     ```bash
-     docker run --rm week13-resource-limit
-     ```
-   - Catat output/hasil pengamatan.
-
-5. **Menjalankan Container Dengan Limit Resource**
-
-   Jalankan container dengan batasan resource (contoh):
-   ```bash
-   docker run --rm --cpus="0.5" --memory="256m" week13-resource-limit
-   ```
-   Catat perubahan perilaku program (mis. lebih lambat, error saat memori tidak cukup, dll.).
-
-6. **Monitoring Sederhana**
-
-   - Jalankan container (tanpa `--rm` jika perlu) dan amati penggunaan resource:
-     ```bash
-     docker stats
-     ```
-   - Ambil screenshot output eksekusi dan/atau `docker stats`.
-
-7. **Commit & Push**
-
-   ```bash
-   git add .
-   git commit -m "Minggu 13 - Docker Resource Limit"
-   git push origin main
-   ```
+**Kata kunci:** CPU Scheduling, FCFS, SJF, Waiting Time, Turnaround Time
 
 ---
 
-## Kode / Perintah
-Tuliskan potongan kode atau perintah utama:
-```bash
-import time
-import os
+## 1.1 Pendahuluan (Introduction)
 
-def stress_test():
-    memory_holder = []
-    iteration = 0
-    
-    print("--- Memulai Stress Test ---")
-    print(f"PID: {os.getpid()}")
-    
-    try:
-        while True:
-            # 1. Komputasi CPU (Menghitung pangkat)
-            _ = [i**2 for i in range(1000)]
-            
-            # 2. Alokasi Memori (~10MB setiap iterasi)
-            chunk = ' ' * (10 * 1024 * 1024)
-            memory_holder.append(chunk)
-            
-            iteration += 1
-            print(f"Iterasi: {iteration} | Estimasi Memori: {iteration * 10} MB")
-            
-            time.sleep(1)
-    except MemoryError:
-        print("Selesai: Terkena Limit Memori (Memory Error)!")
-    except Exception as e:
-        print(f"Terhenti karena: {e}")
+Penjadwalan CPU adalah salah satu fungsi utama sistem operasi yang bertugas mengatur urutan eksekusi proses yang berada dalam keadaan siap (ready state). Tujuan utama penjadwalan CPU adalah untuk meningkatkan efisiensi penggunaan prosesor serta meminimalkan waktu tunggu dan waktu penyelesaian proses.
 
-if __name__ == "__main__":
-    stress_test()
+Algoritma First Come First Served (FCFS) merupakan algoritma penjadwalan paling sederhana yang mengeksekusi proses berdasarkan urutan kedatangan. Meskipun mudah diimplementasikan, FCFS memiliki kelemahan berupa convoy effect, yaitu proses dengan waktu eksekusi panjang dapat menghambat proses lainnya. Sebaliknya, algoritma Shortest Job First (SJF) memilih proses dengan waktu eksekusi (burst time) terpendek terlebih dahulu sehingga secara teori mampu meminimalkan rata-rata waktu tunggu.
 
-```
+Praktikum ini dilakukan untuk membandingkan kinerja algoritma FCFS dan SJF berdasarkan nilai waiting time dan turnaround time menggunakan data proses yang sama.
 
-```bash
-# Gunakan image Python yang ringan
-FROM python:3.9-slim
+Tujuan praktikum ini adalah:
 
-# Set direktori kerja di dalam kontainer
-WORKDIR /app
+1. Mengimplementasikan algoritma penjadwalan FCFS dan SJF.
 
-# Salin skrip uji ke dalam kontainer
-COPY app.py .
+2. Membandingkan kinerja kedua algoritma berdasarkan waiting time dan turnaround time.
 
-# Jalankan skrip saat kontainer dimulai
-CMD ["python", "-u", "app.py"]
-
-```
-```bash
-     docker version
-     docker ps
-```
-
-```bash
-    docker build -t week13-resource-limit .
-```
-
-```bash
-     docker run --rm week13-resource-limit
-```
-
-```bash
-   docker run --rm --cpus="0.5" --memory="256m" week13-resource-limit
-```
-
-```bash
-     docker stats
-```
+3. Menganalisis kelebihan dan kekurangan masing-masing algoritma.
 
 ---
 
-## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/VerifikasiDocker.png)
-![Screenshot hasil](screenshots/BuildDocker.png)
-![Screenshot hasil](screenshots/DockerTanpaLimit.png)
-![Screenshot hasil](screenshots/MonitoringTanpaLimit.png)
-![Screenshot hasil](screenshots/DockerLimit.png)
-![Screenshot hasil](screenshots/MonitoringLimit.png)
+## 2.1 Metode (Methods)
+**2.1.1 Lingkungan Pengujian**
+
+Sistem Operasi: Windows
+
+Bahasa Pemrograman: Python
+
+Editor: Visual Studio Code
+
+Metode Penjadwalan: FCFS dan SJF (non-preemptive)
+
+
+**2.1.2 Data Proses**
+
+Data proses disimpan dalam file Scheduling.csv untuk memisahkan data uji dari kode program sehingga eksperimen lebih terstruktur dan mudah direplikasi.
+
+<div align="center">
+
+| proses | arival time | brust time | 
+| :--- | :--- | :--- | 
+| **p1** | 0 | 8 |
+| **p2** | 1 | 4| 
+| **p3** | 2 | 9 | 
+| **p4** | 3 | 5 | 
+
+</div>
+
+**2.1.3 Prosedur Praktikum**
+
+1. Menyusun data proses dalam file CSV.
+
+2. Membaca data CSV menggunakan program Python.
+
+3. Melakukan simulasi penjadwalan menggunakan algoritma FCFS.
+
+4. Menghitung waiting time dan turnaround time setiap proses.
+
+5. Mengulangi simulasi menggunakan algoritma SJF.
+
+6. Menampilkan hasil dalam bentuk tabel pada terminal.
+   
+---
+
+## 3.1 Hasil(Result)
+
+<div align="center">
+
+**Hasil Penjadwalan FCFS**
+
+| proses | Waiting Time | Turnaround Time | 
+| :--- | :--- | :--- | 
+| **p1** | 0 | 8 |
+| **p2** | 7 | 11| 
+| **p3** | 10 | 19 | 
+| **p4** | 18 | 23 | 
+| **Rata Rata** | 8.75 | 15.25 | 
+
+</div>
+
+<div align="center">
+
+**Hasil Penjadwalan SJF**
+
+| proses | Waiting Time | Turnaround Time | 
+| :--- | :--- | :--- | 
+| **p2** | 0 | 4 |
+| **p4** | 4 | 9| 
+| **p1** | 9 | 17 | 
+| **p3** | 17 | 26 | 
+| **Rata Rata** | 7.50 | 14 | 
+
+</div>
+
+![Screenshot hasil](screenshots/Hasil_Scheduling.png)
 
 ---
 
-## Analisis
-Pada percobaan ini dilakukan pengujian container Docker dengan dan tanpa pembatasan resource CPU dan memori. Saat dijalankan tanpa limit, aplikasi dapat menggunakan resource sistem secara bebas sehingga proses berjalan lebih cepat dan penggunaan CPU terlihat tinggi.
+## 4.1 Pembahasan (Discussion)
 
-Ketika container dijalankan dengan limit CPU, kecepatan eksekusi program menurun karena jatah waktu prosesor dibatasi. Sementara itu, pembatasan memori membatasi penggunaan RAM oleh aplikasi dan dapat menyebabkan proses dihentikan ketika melewati batas yang ditentukan.
+Berdasarkan hasil pengujian, algoritma SJF menghasilkan rata-rata waiting time dan turnaround time yang lebih rendah dibandingkan FCFS. Hal ini disebabkan oleh strategi SJF yang memprioritaskan proses dengan waktu eksekusi terpendek sehingga proses singkat dapat diselesaikan lebih cepat.
 
-Hasil percobaan menunjukkan bahwa pembatasan resource pada Docker efektif untuk mengontrol penggunaan CPU dan memori serta menjaga kestabilan sistem host saat menjalankan beberapa container secara bersamaan.
+Sebaliknya, algoritma FCFS cenderung mengalami convoy effect, di mana proses dengan burst time panjang yang dieksekusi lebih awal menyebabkan proses lain harus menunggu lebih lama. Hal ini terlihat dari tingginya waiting time pada proses P3 dan P4.
+
+Meskipun SJF lebih optimal secara teori, algoritma ini membutuhkan informasi burst time terlebih dahulu, yang pada sistem nyata sulit diprediksi secara akurat. Oleh karena itu, FCFS tetap digunakan pada sistem tertentu karena kesederhanaan dan keadilannya.
 
 ---
 
-## Kesimpulan
-1.Docker memungkinkan pembatasan penggunaan CPU dan memori pada container sehingga aplikasi tidak dapat menggunakan resource sistem secara berlebihan.
+## 5.1 Kesimpulan
 
-2.Penerapan limit CPU dan memori memengaruhi kinerja aplikasi, seperti eksekusi yang lebih lambat atau penghentian proses ketika memori tidak mencukupi.
+1. Algoritma SJF menghasilkan rata-rata waiting time dan turnaround time yang lebih kecil dibandingkan FCFS.
 
-3.Pembatasan resource pada container penting untuk menjaga kestabilan dan efisiensi penggunaan resource pada sistem host.
+2. FCFS lebih sederhana dalam implementasi namun kurang efisien untuk sistem dengan variasi burst time yang besar.
+
+3. Pemilihan algoritma penjadwalan CPU harus disesuaikan dengan kebutuhan dan karakteristik sistem.
 
 ---
 
 ## Quiz
-**1. Mengapa container perlu dibatasi CPU dan memori?**
- 
-   **Pembatasan CPU dan memori diperlukan agar satu container tidak menggunakan resource secara berlebihan dan mengganggu container lain atau sistem host. Dengan limit resource, kinerja sistem menjadi lebih stabil dan adil.**  
-   
-**2. Apa perbedaan VM dan container dalam konteks isolasi resource?**
-   
-   **Virtual Machine (VM) memiliki sistem operasi sendiri dan isolasi resource penuh melalui hypervisor, sehingga lebih berat dan membutuhkan resource besar. Container berbagi kernel host dan menggunakan cgroups serta namespaces, sehingga lebih ringan dan efisien, namun tetap memerlukan pembatasan resource.**  
-   
-**3. Apa dampak limit memori terhadap aplikasi yang boros memori?**
+1. **[Mengapa format IMRAD membantu membuat laporan praktikum lebih ilmiah dan mudah dievaluasi?]**  
 
-   **Limit memori membatasi jumlah RAM yang dapat digunakan aplikasi. Jika aplikasi melebihi batas tersebut, proses dapat dihentikan secara paksa (Out-Of-Memory Kill), sehingga mencegah aplikasi menyebabkan crash atau penurunan performa sistem host.**  
+   Karena IMRAD menyusun laporan secara sistematis mulai dari tujuan, metode, hasil, hingga analisis sehingga memudahkan evaluasi secara akademik.
+    
+3. **[Apa perbedaan antara bagian Hasil dan Pembahasan?]**  
+
+   Bagian Hasil menyajikan data secara objektif, sedangkan Pembahasan berisi analisis dan interpretasi dari data tersebut.
+     
+5. **[Mengapa sitasi dan daftar pustaka penting, bahkan untuk laporan praktikum?]**  
+
+   Sitasi menunjukkan dasar teori yang digunakan dan meningkatkan kredibilitas serta keabsahan laporan. 
 
 ---
 
-## Refleksi Diri
+## Daftar Pustaka
 
-Melalui praktikum ini, saya memahami konsep dasar containerization menggunakan Docker serta cara sistem operasi mengelola dan membatasi penggunaan resource melalui mekanisme cgroups. Praktikum ini membantu saya melihat secara langsung perbedaan perilaku aplikasi saat dijalankan dengan dan tanpa pembatasan CPU dan memori.
+Silberschatz, A., Galvin, P. B., & Gagne, G. Operating System Concepts, 10th Edition.
 
-Selain itu, saya menjadi lebih memahami pentingnya pembatasan resource untuk menjaga kestabilan sistem ketika menjalankan beberapa aplikasi secara bersamaan. Pengetahuan ini berguna sebagai dasar dalam pengelolaan aplikasi berbasis container di lingkungan pengembangan maupun produksi
+Tanenbaum, A. S. Modern Operating Systems, 4th Edition.
+
+OSTEP – CPU Scheduling. 
+
 
 ---
 
