@@ -1,4 +1,4 @@
-
+Laporan Praktikum Minggu [10]
 Topik: [Manajemen Memori – Page Replacement (FIFO & LRU)]
 
 Identitas
